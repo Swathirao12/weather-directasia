@@ -1,0 +1,211 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WeatherService",
+    "version": "1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "WeatherService"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/weather/current": {
+      "get": {
+        "tags": [
+          "WeatherService"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/weather/forecast": {
+      "get": {
+        "tags": [
+          "WeatherService"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "days",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/weather/historical": {
+      "get": {
+        "tags": [
+          "WeatherService"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "fromUtc",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "toUtc",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/weather/export/csv": {
+      "get": {
+        "tags": [
+          "WeatherService"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "fromUtc",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "toUtc",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/alerts/subscribe": {
+      "post": {
+        "tags": [
+          "WeatherService"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscribeAlertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/alerts/subscriptions": {
+      "get": {
+        "tags": [
+          "WeatherService"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SubscribeAlertRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "minTemperatureC": {
+          "format": "double",
+          "type": "number"
+        },
+        "maxTemperatureC": {
+          "format": "double",
+          "type": "number"
+        },
+        "maxAirQualityIndex": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "ApiKey": {
+      "type": "apiKey",
+      "name": "X-API-Key",
+      "in": "header",
+      "description": "API key for Weather service"
+    }
+  },
+  "security": [
+    {
+      "ApiKey": [ ]
+    }
+  ]
+}
