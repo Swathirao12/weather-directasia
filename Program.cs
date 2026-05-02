@@ -210,3 +210,5 @@ app.MapGet("/api/alerts/subscriptions", async (WeatherDbContext db, Cancellation
 }).RequireRateLimiting("api");
 
 app.Run();
+
+public partial class Program { }
