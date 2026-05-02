@@ -1,0 +1,47 @@
+# File: .github/workflows/deploy-aws.yml
+
+name: Build and Deploy .NET API to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Install .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Restore dependencies
+      - name: Restore Packages
+        run: dotnet restore
+
+      # Build application
+      - name: Build Project
+        run: dotnet build --configuration Release --no-restore
+
+      # Publish application
+      - name: Publish Project
+        run: dotnet publish --configuration Release --output ./publish
+
+      # Configure AWS credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1
+
+      # Example deploy step (placeholder)
+      - name: Deploy Placeholder
+        run: echo "Ready to deploy to AWS"
