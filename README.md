@@ -1,6 +1,6 @@
 # WeatherService
 
-Simple .NET 10 Weather microservice with:
+Simple .NET 9.0 Weather microservice with:
 - Current and forecast weather endpoints by location.
 - Historical storage in SQLite.
 - CSV export of historical weather data.
