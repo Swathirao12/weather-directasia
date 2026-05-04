@@ -9,7 +9,7 @@ Simple .NET 9.0 Weather microservice with:
 
 ## Quick Start
 
-1. Install [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
+1. Install [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0).
 2. From this folder:
    - `dotnet restore`
    - `dotnet build`
